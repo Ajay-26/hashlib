@@ -11,3 +11,4 @@ all: test.o sha256.o utils.o
 
 clean: 
 	rm -r test
+	rm *.o

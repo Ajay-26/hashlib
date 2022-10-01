@@ -6,6 +6,15 @@ SHA256::SHA256(){
 	this->block_size = 512;
 	this->digest_size = 256;
 	this->word_size = 32;
+	this->initial_hash = new uint32_t(8);
+	this->initial_hash[0] = hex_to_num(std::string("6a09e667"));
+	this->initial_hash[1] = hex_to_num(std::string("bb67ae85"));
+	this->initial_hash[2] = hex_to_num(std::string("3c6ef372"));
+	this->initial_hash[3] = hex_to_num(std::string("a54ff53a"));
+	this->initial_hash[4] = hex_to_num(std::string("510e527f"));
+	this->initial_hash[5] = hex_to_num(std::string("9b05688c"));
+	this->initial_hash[6] = hex_to_num(std::string("1f83d9ab"));
+	this->initial_hash[7] = hex_to_num(std::string("5be0cd19"));
 }
 
 std::string SHA256::to_binary(std::string message){
@@ -45,4 +54,22 @@ void SHA256::pad(std::string& message){
 		message = message + to_bits(n);
 		return;
 	}
+}
+
+void SHA256::parse(std::string message){
+	/*
+		Takes in a binary padded message string and divides it into blocks. Those blocks are saved to this->padded_message
+	*/
+	int n = message.size();
+	if(n%this->block_size != 0){
+		return;
+	}
+	int i;
+	std::string tmp;
+	while(i<n){
+		tmp = message.substr(i,this->word_size);
+		padded_message.push_back(bin_to_num(tmp));
+		i += this->word_size;
+	}
+	return;
 }

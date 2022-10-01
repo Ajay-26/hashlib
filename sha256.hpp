@@ -12,11 +12,13 @@ public:
 	uint32_t *hash_message(std::string message);
 
 private:
-	uint32_t *padded_message;
+	std::vector<uint32_t> padded_message;
 	uint32_t *hash;
+	uint32_t *initial_hash;
 	int block_size;
 	int word_size;
 	int digest_size;
 	std::string to_binary(std::string message);
 	void pad(std::string& message);
+	void parse(std::string message);
 };
