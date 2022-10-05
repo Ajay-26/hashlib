@@ -1,5 +1,15 @@
 #include "utils.hpp"
 
+std::chrono::steady_clock::time_point get_time(){
+	return std::chrono::steady_clock::now();
+}
+
+void print_time_diff(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end){
+	//std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "[s]" << std::endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds> (end - begin).count() << "[µs]" << std::endl;
+	//std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
+}
+
 std::string to_bits(int n){
 	//Gets binary representation of n
 	std::string bits;

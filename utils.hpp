@@ -5,6 +5,11 @@
 #include <string>
 #include <map>
 #include <assert.h>
+#include <chrono>
+
+std::chrono::steady_clock::time_point get_time();
+
+void print_time_diff(std::chrono::steady_clock::time_point begin, std::chrono::steady_clock::time_point end);
 
 std::string to_bits(int n);
 
