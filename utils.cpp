@@ -53,3 +53,60 @@ uint32_t bin_to_num(std::string bits){
 uint32_t hex_to_num(std::string hex){
 	return bin_to_num(hex_to_bin(hex));
 }
+
+std::string string_to_bin(std::string str){
+	int n = str.size();
+	int i;
+	int val;
+	std::string ans;
+	for(i=0;i<n;i++){
+		val = static_cast<int>(str[i]);
+		ans = ans + to_bits(val);
+	}
+	return ans;
+}
+
+uint32_t rotate_left(uint32_t x, int n){
+	int w = 32;
+	return (x >> n) | (x << (w - n));
+}
+
+uint32_t rotate_right(uint32_t x, int n){
+	int w = 32;
+	return (x << n) | (x >> (w - n));
+}
+
+uint32_t alpha0(uint32_t x){
+	return rotate_right(x,7) ^ rotate_right(x,18) ^ rotate_right(x,3);
+}
+
+uint32_t alpha1(uint32_t x){
+	return rotate_right(x,17) ^ rotate_right(x,19) ^ rotate_right(x,10);
+}
+
+uint32_t sigma0(uint32_t x){
+	return rotate_right(x,2) ^ rotate_right(x,13) ^ rotate_right(x,22);
+}
+
+uint32_t sigma1(uint32_t x){
+	return rotate_right(x,6) ^ rotate_right(x,11) ^ rotate_right(x,25);
+}
+
+uint32_t ch(uint32_t x,uint32_t y, uint32_t z){
+	return (x & y) ^ ((!x) & z);
+}
+
+uint32_t maj(uint32_t x,uint32_t y, uint32_t z){
+	return (x&y) ^ (y&z) ^ (x&z);	
+}
+
+void print_hash(uint32_t *h){
+	//h has 8 elements
+	int n = 8;
+	int i;
+	for(i=0;i<n;i++){
+		std::cout << h[i];
+	}
+	std::cout  << std::endl;
+	return;
+}
